@@ -20,9 +20,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [TeamController::class, 'index']);
-Route::get('/teams/{id}', [TeamController::class, 'show']);
-Route::get('/players/{id}', [PlayerController::class, 'show']);
+Route::get('/', [TeamController::class, 'index'])->middleware('unauth');
+Route::get('/teams/{id}', [TeamController::class, 'show'])->middleware('unauth');
+Route::get('/players/{id}', [PlayerController::class, 'show'])->middleware('unauth');
+
 Route::get('/signin', function () {
     return view('signin');
 });
@@ -30,4 +31,5 @@ Route::get('/signup', function () {
     return view('signup');
 });
 Route::post('/signup', [AuthController::class, 'signUp']);
-Route::post('/signin', [AuthController::class, 'signin']);
+Route::post('/signin', [AuthController::class, 'signIn']);
+Route::get('/signout', [AuthController::class, 'signOut']);

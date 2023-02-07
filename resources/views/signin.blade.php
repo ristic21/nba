@@ -21,7 +21,7 @@
         
     
     
-        <button type="submit" class="btn btn-primary">Create post</button>
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
     
     <div class="container">

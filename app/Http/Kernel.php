@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\AuthCheck;
 use App\Http\Middleware\AuthCheck2;
+use App\Http\Middleware\CommentCheck;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -67,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'unauth' => AuthCheck::class,
         'alreadyAuth' => AuthCheck2::class,
+        'invalidComment' => CommentCheck::class,
     ];
 }

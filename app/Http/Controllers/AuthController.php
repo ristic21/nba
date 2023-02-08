@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\VerifyEmail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -18,12 +21,19 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('/')->withSuccess('Signed in');
-        }
-        return redirect('signin')->withErrors('Invalid credentials');
 
-    }
+        
+        if (!Auth::attempt($credentials)) {
+            return redirect('signin')->withErrors('Invalid credentials');
+        }
+
+        if(Auth::user()->email_verified_at == NULL) {
+            $this->signOut();
+            return redirect()->intended('/')->withErrors('You are not verified');
+        }
+
+        return redirect('/')->withErrors('Login success');
+    } 
 
     public function signUp(Request $request) {
 
@@ -37,13 +47,16 @@ class AuthController extends Controller
             "password"=> 'required|min:5|max:150|string'
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+        
+        $mailData = $user->only('id');
+        Mail::to($user->email)->send(new VerifyEmail($mailData));
 
-        return redirect('/');
+        return redirect('/signin');
     }
 
     public function  signOut() {
@@ -52,5 +65,20 @@ class AuthController extends Controller
 
        return redirect('signin');
         
+    }
+
+    public function verifyEmail($id) {
+        
+
+        $user = User::find($id);
+        if($user->email_verified_at != NULL) {
+            return redirect('/signin');
+        }
+
+        $user->email_verified_at = date(now());
+        $user->save();
+
+        return redirect('/signin');
+         
     }
 }

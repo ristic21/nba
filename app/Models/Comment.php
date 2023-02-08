@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Team extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     public function team()
     {
-        return $this->hasMany(Player::class);
+        return $this->belongsTo(Team::class);
     }
 
-    public function comments()
+    public function user()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Player;
+use App\Models\Comment;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class TeamController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::paginate(10);
-        return view('teams', compact('teams')) ;
+        //
     }
 
     /**
@@ -27,10 +28,26 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'content' => 'required|min:5|max:2000|string',
+            
+        ]);
 
-        
+        $this->middleware('invalidComment');
 
+        $comment = new Comment();
+        $comment->content = $request->content;
         
+        $team = Team::find($request->team_id);
+
+        $comment->team()->associate($team);
+
+        $user = User::find(Auth::user()->id);
+        $comment->user()->associate($user);
+
+        $comment->save();
+
+        return redirect('teams/' . $request->team_id)->with('status', 'Comment successfully posted');
     }
 
     /**
@@ -41,12 +58,8 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-        $team = Team::find($id);
-        $players = Player::where('team_id', $id)->get();
-        return view('team', compact('team', 'players'));
+        //
     }
-
-   
 
     /**
      * Update the specified resource in storage.

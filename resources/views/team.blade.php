@@ -13,4 +13,7 @@
         <a href="/players/{{$player->id}}">{{$player->first_name}} {{$player->last_name}}</a>
         
     @endforeach
+
+    @include('components.comments')
+    @include('createComment')
 @endsection

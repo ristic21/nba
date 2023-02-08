@@ -26,10 +26,10 @@ Route::get('/players/{id}', [PlayerController::class, 'show'])->middleware('unau
 
 Route::get('/signin', function () {
     return view('signin');
-});
+})->middleware('alreadyAuth');
 Route::get('/signup', function () {
     return view('signup');
-});
+})->middleware('alreadyAuth');
 Route::post('/signup', [AuthController::class, 'signUp']);
 Route::post('/signin', [AuthController::class, 'signIn']);
 Route::get('/signout', [AuthController::class, 'signOut']);

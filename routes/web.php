@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [TeamController::class, 'index'])->middleware('unauth');
 Route::get('/teams/{id}', [TeamController::class, 'show'])->middleware('unauth');
 Route::get('/players/{id}', [PlayerController::class, 'show'])->middleware('unauth');
+
+Route::get('/news', [NewsController::class, 'index'])->middleware('unauth');
+Route::get('/news/{id}', [NewsController::class, 'show'])->middleware('unauth');
 
 Route::get('/signin', function () {
     return view('signin');

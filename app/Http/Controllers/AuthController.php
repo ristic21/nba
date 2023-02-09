@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\VerifyEmail;
+use App\Models\Team;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -81,4 +82,6 @@ class AuthController extends Controller
         return redirect('/signin');
          
     }
+
+    
 }

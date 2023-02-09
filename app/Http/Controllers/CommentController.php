@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CommentRecieved;
 use App\Models\Comment;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -46,6 +48,9 @@ class CommentController extends Controller
         $comment->user()->associate($user);
 
         $comment->save();
+
+        $mailData = $team->only('id');
+        Mail::to($team->email)->send(new CommentRecieved($mailData));
 
         return redirect('teams/' . $request->team_id)->with('status', 'Comment successfully posted');
     }

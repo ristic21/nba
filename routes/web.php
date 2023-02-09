@@ -34,9 +34,11 @@ Route::get('/signup', function () {
 Route::post('/signup', [AuthController::class, 'signUp']);
 Route::post('/signin', [AuthController::class, 'signIn']);
 Route::get('/signout', [AuthController::class, 'signOut']);
+
 Route::post('/createcomment', [CommentController::class, 'store'])->middleware('invalidComment');
 
 Route::get('/verify/{id}', [AuthController::class, 'verifyEmail']);
+
 
 Route::get('/invalidComment', function () {
     return view('invalidComment');

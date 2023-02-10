@@ -13,7 +13,7 @@ class NewsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public static function run()
     {
         News::factory()->count(40)->create();
     }

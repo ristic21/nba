@@ -2,7 +2,7 @@
 
 
 @section('content')
-
+@include('sidebar')
     
     <div class="container">
         <h1>Teams</h1>

@@ -2,6 +2,8 @@
     <div class="container d-flex flex-wrap">
       <ul class="nav me-auto">
         <li class="nav-item"><a href="/" class="nav-link link-dark px-2 active" aria-current="page">Teams</a></li>
+        <li class="nav-item"><a href="/news" class="nav-link link-dark px-2 active" aria-current="page">News</a></li>
+        <li class="nav-item"><a href="/createnews" class="nav-link link-dark px-2 active" aria-current="page">Create news</a></li>
         <li class="nav-item"><a href="/players" class="nav-link link-dark px-2"></a></li>
         <li class="nav-item"><a href="/about" class="nav-link link-dark px-2"></a></li>
         <li class="nav-item"><a href="/createpost" class="nav-link link-dark px-2"></a></li>

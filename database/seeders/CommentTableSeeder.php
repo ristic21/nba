@@ -13,7 +13,7 @@ class CommentTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public static function run()
     {
         Comment::factory()->count(100)->create();
     }

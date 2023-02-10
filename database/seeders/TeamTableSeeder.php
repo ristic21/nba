@@ -13,7 +13,7 @@ class TeamTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public static function run()
     {
         Team::factory()->count(25)->create();
     }

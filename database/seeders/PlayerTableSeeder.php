@@ -13,7 +13,7 @@ class PlayerTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public static function run()
     {
         Player::factory()->count(100)->create();
     }

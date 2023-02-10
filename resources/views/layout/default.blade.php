@@ -6,8 +6,9 @@
 <body>
   
   @include('layout.header')
-
+  
   <main class="container">
+ 
     @yield('content')
   </main>
 

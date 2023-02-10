@@ -14,9 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        UserTableSeeder::run();
         TeamTableSeeder::run();
         PlayerTableSeeder::run();
+        NewsTableSeeder::run();
         CommentTableSeeder::run();
-        
     }
 }

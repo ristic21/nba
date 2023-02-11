@@ -31,7 +31,7 @@ Route::get('/news/{id}', [NewsController::class, 'show'])->middleware('unauth');
 Route::get('/news/team/{team_name}', [NewsController::class, 'show2'])->middleware('unauth');
 Route::get('/createnews', [NewsController::class, 'index2'])->middleware('unauth');
 
-Route::get('/', [NewsController::class, 'index'])->middleware('unauth');
+// Route::get('/', [NewsController::class, 'index'])->middleware('unauth');
 
 Route::post('/createnews', [NewsController::class, 'store'])->middleware('unauth');
 

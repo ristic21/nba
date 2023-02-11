@@ -13,8 +13,8 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::paginate(10);
-        $teams = Team::whereHas('news')->get();
-        return view('news', compact('news', 'teams')) ;
+        $teamsSidebar = Team::whereHas('news')->get();
+        return view('news', compact('news', 'teamsSidebar')) ;
     }
 
     public function index2()
@@ -46,7 +46,7 @@ class NewsController extends Controller
             $q->whereIn('teams.id', [$team->id]);
         })->paginate(10);
 
-        return view('news', compact('news'));
+        return view('teamNews', compact('news'));
     }
 
 

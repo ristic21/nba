@@ -16,7 +16,8 @@ class TeamController extends Controller
     public function index()
     {
         $teams = Team::paginate(10);
-        return view('teams', compact('teams')) ;
+        $teamsSidebar = Team::whereHas('news')->get();
+        return view('teams', compact('teams', 'teamsSidebar')) ;
     }
 
     /**
